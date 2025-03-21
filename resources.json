@@ -1,0 +1,146 @@
+{
+    "model-inference": {
+        "compute": {
+            "ec2-instances": {
+                "description": "EC2 instances running model inference workloads"
+            },
+            "eks": {
+                "description": "Kubernetes cluster for model orchestration",
+                "resources": [
+                    "arn:aws:eks:ap-northeast-1:093411005699:cluster/bento-platform"
+                ]
+            }
+        },
+        "networking": {
+            "vpc": {
+                "description": "VPC network infrastructure",
+                "resources": [
+                    "arn:aws:ec2:ap-northeast-1:093411005699:vpc/vpc-00fb4d04e8ac346e8"
+                ]
+            },
+            "elb": {
+                "description": "Load balancers for traffic distribution",
+                "resources": [
+                    "arn:aws:elasticloadbalancing:ap-northeast-1:093411005699:loadbalancer/net/bento-prod-load-balancer/0bdc9e8117c8599e",
+                    "arn:aws:elasticloadbalancing:ap-northeast-1:093411005699:loadbalancer/net/k8s-istiosys-istioing-e46c7e8623/70e1078800bc9380",
+                    "arn:aws:elasticloadbalancing:ap-northeast-1:093411005699:loadbalancer/net/k8s-istiosys-istioing-88dabd6ff2/b0cfc4cb825d73ea"
+                ]
+            },
+            "waf": {
+                "description": "Web Application Firewall",
+                "resources": [
+                    "arn:aws:wafv2:ap-northeast-1:093411005699:regional/webacl/prod-bento-standard-web-acl/f7c852a5-6392-40f0-b6cd-41d8ba9eb31c"
+                ]
+            },
+            "route53": {
+                "description": "DNS and routing",
+                "resources": [
+                    "arn:aws:route53:::hostedzone/Z03129582JKCMQZPRA0E5"
+                ]
+            },
+            "api_gateway": {
+                "description": "API Gateway for REST endpoints",
+                "resources": [
+                    "arn:aws:apigateway:ap-northeast-1::/restapis/0jg0d0niy8",
+                    "arn:aws:apigateway:ap-northeast-1::/restapis/av3j8rv2n0",
+                    "arn:aws:apigateway:ap-northeast-1::/restapis/dy2qyx8rh5",
+                    "arn:aws:apigateway:ap-northeast-1::/restapis/ghj8m7eckl",
+                    "arn:aws:apigateway:ap-northeast-1::/restapis/hzyqwavp21",
+                    "arn:aws:apigateway:ap-northeast-1::/restapis/vjbtm6vxl5"
+                ]
+            },
+            "natgateway": {
+                "description": "NAT Gateway for outbound internet access",
+                "resources": [
+                    "arn:aws:ec2:ap-northeast-1:093411005699:natgateway/nat-089772eded2d7a32c"
+                ]
+            }
+        },
+        "storage": {
+            "s3": {
+                "description": "Object storage for models and data",
+                "resources": [
+                    "arn:aws:s3:::bento-model-registry-prod"
+                ]
+            },
+            "ecr": {
+                "description": "Container image registry",
+                "resources": [
+                    "aif-bento-inference-mfx-invoice-ocr",
+                    "aif-bento-inference-box-invoice-ocr",
+                    "aif-bento-inference-line-ocr",
+                    "aif-bento-inference-payable-ocr",
+                    "aif-bento-inference-sear-ocr",
+                    "aif-bento-inference-fa-ocr"
+                ]
+            },
+            "ebs": {
+                "description": "Block storage for instances"
+            }
+        },
+        "databases": {
+            "rds": {
+                "description": "Relational database service",
+                "resources": [
+                    "arn:aws:rds:ap-northeast-1:093411005699:db:bentodb-production-1"
+                ]
+            },
+            "dynamodb": {
+                "description": "NoSQL database service",
+                "resources": [
+                    "arn:aws:dynamodb:ap-northeast-1:093411005699:table/mf-aif-bento-terraform-lock",
+                    "arn:aws:dynamodb:ap-northeast-1:093411005699:table/prod-aif-experiments-terraform-lock",
+                    "arn:aws:dynamodb:ap-northeast-1:093411005699:table/prod-bento-terraform-lock"
+                ]
+            }
+        },
+        "security": {
+            "kms": {
+                "description": "Key Management Service",
+                "resources": [
+                    "arn:aws:kms:ap-northeast-1:093411005699:key/2f4aa29c-4e79-48cf-b549-27141eaa2928"
+                ]
+            },
+            "secrets_manager": {
+                "description": "Secrets management service",
+                "resources": [
+                    "arn:aws:secretsmanager:ap-northeast-1:093411005699:secret:rds!cluster-2810d750-bd42-4bf5-9adb-bef9d7e0a9dc-CWH2ln"
+                ]
+            }
+        },
+        "monitoring": {
+            "cloudwatch": {
+                "description": "Monitoring and logging",
+                "resources": [
+                    "/aws/apigateway/welcome",
+                    "/aws/containerinsights/bento-platform/application",
+                    "/aws/containerinsights/bento-platform/dataplane",
+                    "/aws/containerinsights/bento-platform/host",
+                    "/aws/containerinsights/bento-platform/performance",
+                    "/aws/eks/bento-platform/cluster",
+                    "/aws/rds/proxy/rds-proxy-prod-ai-forward",
+                    "/stats/box-invoice-ocr",
+                    "/stats/mfx-invoice-ocr",
+                    "/stats/payable-ocr",
+                    "/API-Gateway-Execution-Logs_0jg0d0niy8/primary",
+                    "/API-Gateway-Execution-Logs_av3j8rv2n0/v1",
+                    "/API-Gateway-Execution-Logs_dy2qyx8rh5/primary",
+                    "/API-Gateway-Execution-Logs_ghj8m7eckl/primary",
+                    "/API-Gateway-Execution-Logs_hzyqwavp21/primary",
+                    "/API-Gateway-Execution-Logs_vjbtm6vxl5/primary"
+                ]
+            }
+        },
+        "messaging": {
+            "sqs": {
+                "description": "Message queuing service",
+                "resources": [
+                    "arn:aws:sqs:ap-northeast-1:093411005699:bento-platform"
+                ]
+            }
+        },
+        "other_ec2": {
+            "description": "Other EC2-related resources"
+        }
+    }
+} 
