@@ -34,6 +34,7 @@ Cost Identification on Bento Infra
     aws_account_id = "AWS_ACCOUNT_ID"
     region = 'YOUR_REGION'
     ```
+- Export you AWS Credentials from AWS.
 - Run python scripts to get Cost identification csv files.
     ```
     python read_costs.py
