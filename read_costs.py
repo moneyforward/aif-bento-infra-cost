@@ -4,9 +4,10 @@ import json
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-start_date = "2025-02-01"
-end_date = "2025-02-24"
+start_date = "2025-06-01"
+end_date = "2025-06-30"
 aws_account_id = "093411005699"
+region = 'ap-northeast-1'
 
 #download the costs.csv file from cost explorer for specific month
 def get_service_names(csv_file="costs.csv"):
@@ -77,7 +78,7 @@ def read_json_file(json_file="resources.json", json_path=None, return_value=Fals
 def get_cloudwatch_log_groups():
     try:
         # Initialize CloudWatch Logs client
-        logs_client = boto3.client('logs')
+        logs_client = boto3.client('logs', region_name=region)
         
         # Get all log groups
         log_groups = []
@@ -186,7 +187,7 @@ def get_specific_log_group_cost(log_group_name=None, output_file="log_group_cost
 # Get the cost for the ECR repositories which is in the resources.json file
 def get_ecr_repos_cost(output_file="ecr_costs.csv", return_value=False):
     # Create client for ECR
-    ecr_client = boto3.client('ecr')
+    ecr_client = boto3.client('ecr', region_name=region)
     
     try:
         # Get ECR repositories from resources.json
@@ -257,7 +258,7 @@ def get_ecr_repos_cost(output_file="ecr_costs.csv", return_value=False):
         return None
 
 def get_ec2_instance_costs(output_file="ec2_costs.csv", return_value=False):
-    ce_client = boto3.client('ce')
+    ce_client = boto3.client('ce', region_name=region)
     
     try:
         # Get total EC2 cost from CSV
@@ -337,7 +338,7 @@ def get_ec2_instance_costs(output_file="ec2_costs.csv", return_value=False):
     
 
 def get_aurora_storage_costs(output_file="aurora_storage_costs.csv", return_value=False):
-    ce_client = boto3.client('ce')
+    ce_client = boto3.client('ce', region_name=region)
     
     try:
         # Get RDS Aurora storage-related costs
@@ -478,7 +479,7 @@ def get_eks_costs(output_file="eks_costs.csv", return_value=False):
         return None
 
 def get_dynamodb_costs(output_file="dynamodb_costs.csv", return_value=False):
-    dynamodb = boto3.client('dynamodb')
+    dynamodb = boto3.client('dynamodb', region_name=region)
     
     try:
         # Get DynamoDB tables from resources.json
@@ -610,7 +611,7 @@ def get_waf_costs(output_file="waf_costs.csv", return_value=False):
         return None
 
 def get_specific_s3_costs(return_value=False):
-    s3_client = boto3.client('s3')
+    s3_client = boto3.client('s3', region_name=region)
     
     try:
         # Get S3 buckets from resources.json
@@ -694,8 +695,8 @@ def get_specific_s3_costs(return_value=False):
         return None
 
 def get_specific_kms_costs(output_file="kms_costs.csv", return_value=False):
-    kms_client = boto3.client('kms')
-    cloudwatch = boto3.client('cloudwatch')
+    kms_client = boto3.client('kms', region_name=region)
+    cloudwatch = boto3.client('cloudwatch', region_name=region)
     
     # KMS pricing for Asia Pacific
     ASIA_PACIFIC_KEY_COST = 1.0  # $1.00 per KMS key per month
@@ -838,8 +839,8 @@ def get_sqs_costs(output_file="sqs_costs.csv", return_value=False):
         return None
 
 def get_vpc_costs(output_file="vpc_costs.csv", return_value=False):
-    ec2_client = boto3.client('ec2')
-    cloudwatch = boto3.client('cloudwatch')
+    ec2_client = boto3.client('ec2', region_name=region)
+    cloudwatch = boto3.client('cloudwatch', region_name=region)
     
     try:
         # Get VPC info from resources.json
@@ -945,8 +946,8 @@ def get_vpc_costs(output_file="vpc_costs.csv", return_value=False):
     
 
 def get_nlb_costs(output_file="nlb_costs.csv", return_value=False):
-    elb_client = boto3.client('elbv2')
-    cloudwatch = boto3.client('cloudwatch')
+    elb_client = boto3.client('elbv2', region_name=region)
+    cloudwatch = boto3.client('cloudwatch', region_name=region)
     
     # Constants for pricing
     NLB_HOURLY_COST = 0.0225  # $0.0225 per hour
@@ -1048,8 +1049,8 @@ def get_nlb_costs(output_file="nlb_costs.csv", return_value=False):
 
 
 def get_nat_gateway_costs(output_file="nat_gateway_costs.csv", return_value=False):
-    ec2_client = boto3.client('ec2')
-    cloudwatch = boto3.client('cloudwatch')
+    ec2_client = boto3.client('ec2', region_name=region)
+    cloudwatch = boto3.client('cloudwatch', region_name=region)
     
     # NAT Gateway pricing for Asia Pacific
     NAT_GATEWAY_HOURLY = 0.062     # $0.062 per hour
@@ -1207,7 +1208,7 @@ def get_nat_gateway_costs(output_file="nat_gateway_costs.csv", return_value=Fals
         return None
 
 def get_eks_ebs_costs(output_file="eks_ebs_costs.csv", return_value=False):
-    ec2_client = boto3.client('ec2')
+    ec2_client = boto3.client('ec2', region_name=region)
     
     # EBS pricing for Asia Pacific
     GP2_COST_PER_GB = 0.12  # $0.12 per GB-month for gp2
