@@ -90,7 +90,11 @@
                 "resources": [
                     "arn:aws:dynamodb:ap-northeast-1:093411005699:table/mf-aif-bento-terraform-lock",
                     "arn:aws:dynamodb:ap-northeast-1:093411005699:table/prod-aif-experiments-terraform-lock",
-                    "arn:aws:dynamodb:ap-northeast-1:093411005699:table/prod-bento-terraform-lock"
+                    "arn:aws:dynamodb:ap-northeast-1:093411005699:table/prod-bento-terraform-lock",
+                    "arn:aws:dynamodb:ap-northeast-1:093411005699:table/prod-aif-inference-results",
+                    "arn:aws:dynamodb:ap-northeast-1:093411005699:table/prod-aif-inference-results-document-type-classification",
+                    "arn:aws:dynamodb:ap-northeast-1:093411005699:table/prod-aif-inference-results-sear-ocr",
+                    "arn:aws:dynamodb:ap-northeast-1:093411005699:table/prod-aif-inference-results-self-issued-classification"
                 ]
             }
         },
@@ -122,12 +126,17 @@
                     "/stats/box-invoice-ocr",
                     "/stats/mfx-invoice-ocr",
                     "/stats/payable-ocr",
-                    "/API-Gateway-Execution-Logs_0jg0d0niy8/primary",
-                    "/API-Gateway-Execution-Logs_av3j8rv2n0/v1",
-                    "/API-Gateway-Execution-Logs_dy2qyx8rh5/primary",
-                    "/API-Gateway-Execution-Logs_ghj8m7eckl/primary",
-                    "/API-Gateway-Execution-Logs_hzyqwavp21/primary",
-                    "/API-Gateway-Execution-Logs_vjbtm6vxl5/primary"
+                    "/stats/sear-ocr",
+                    "/stats/fa-ocr",
+                    "/stats/line-ocr",
+                    "API-Gateway-Execution-Logs_0jg0d0niy8/primary",
+                    "API-Gateway-Execution-Logs_av3j8rv2n0/v1",
+                    "API-Gateway-Execution-Logs_dy2qyx8rh5/primary",
+                    "API-Gateway-Execution-Logs_ghj8m7eckl/primary",
+                    "API-Gateway-Execution-Logs_0fcqdxmv6d/primary",
+                    "API-Gateway-Execution-Logs_hzyqwavp21/primary",
+                    "API-Gateway-Execution-Logs_vjbtm6vxl5/primary",
+                    "API-Gateway-Execution-Logs_9hjk5nn2i1/primary"
                 ]
             }
         },
